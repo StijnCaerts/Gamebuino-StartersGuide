@@ -1,0 +1,119 @@
+\documentclass[a4paper,titlepage,12pt]{article}
+\usepackage[dutch]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\lstlistingname}{Code}
+
+
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\definecolor{darkgreen}{rgb}{0.0745,0.568,0.039}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,    
+	%   rulecolor=,
+	language=[GNU]C++,
+	basicstyle=\scriptsize,
+	upquote=true,
+	aboveskip={1.5\baselineskip},
+	columns=fixed,
+	showstringspaces=false,
+	extendedchars=false,
+	breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	frame=single,
+	numbers=left,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	identifierstyle=\ttfamily,
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.026,0.112,0.095},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+	%        \lstdefinestyle{C++}{language=C++,style=numbers}’.
+}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	language=C++,
+	captionpos=b,
+	tabsize=3,
+	frame=lines,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	basicstyle=\footnotesize,
+	%  identifierstyle=\color{magenta},
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color{darkgreen},
+	stringstyle=\color{red}
+}
+
+\title{Gamebuino}
+\author{Stijn Caerts}
+
+\begin{document}
+	\maketitle
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Basis}
+	Net zoals elk programma dat voor Arduino geschreven is, bevat een programma voor Gamebuino de twee functies \texttt{setup()} en \texttt{loop()}. In deze sectie gaan we dieper in op de basisstructuur die in elk programma aanwezig is.
+	
+	\begin{lstlisting}[language=C++, caption=Structuur van een Gamebuino programma]
+	#include <SPI.h>
+	#include <Gamebuino.h>
+	
+	Gamebuino gb;
+	
+	void setup(){
+		gb.begin();
+		gb.titleScreen(F("Hello World!"));
+		gb.pickRandomSeed();
+	}
+	
+	void loop(){
+		//updates the gamebuino (the display, the sound, the auto backlight... everything)
+		//returns true when it's time to render a new frame (20 times/second)
+		if(gb.update()){
+			if (gb.buttons.pressed(BTN_C)) {
+				gb.titleScreen(F("Hello World!"));
+			}
+			//prints Hello World! on the screen
+			gb.display.println(F("Hello World!"));
+			//declare a variable named count of type integer :
+			int count;
+			//get the number of frames rendered and assign it to the "count" variable
+			count = gb.frameCount;
+			//prints the variable "count"
+			gb.display.println(count);
+		}
+	}
+	\end{lstlisting}
+	
+	\subsection{Libraries importeren}
+	Voor we aan de slag kunnen gaan met programmeren, moeten we twee libraries importeren. Deze zullen het ons heel wat makkelijker maken om programma's te schrijven voor Gamebuino. De \emph{SPI} library is vereist voor de communicatie met het scherm van de Gamebuino. Verder gebruiken we de \emph{Gamebuino} library, die voor een handige interface zorgt zodat we gemakkelijk alle functies van het apparaat kunnen aanspreken zodat we ons enkel moeten focussen op het ontwerpen en programmeren van het spel zelf.
+	Zie wel dat de libraries die je wilt importeren ook geïnstalleerd zijn in de Arduino IDE, anders zal de library niet gevonden worden en zal je de code niet kunnen compilen.
+	\begin{lstlisting}[language=C++, caption={Importeren van libraries}]
+	#include <SPI.h>
+	#include <Gamebuino.h>
+	\end{lstlisting}
+	
+	\subsection{Het \texttt{Gamebuino} object}
+	
+	\subsection{\texttt{setup()}}
+	\subsection{\texttt{loop()}}
+	
+	\section{Gamebuino library}
+	
+\end{document}
