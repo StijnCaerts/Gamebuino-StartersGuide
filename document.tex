@@ -2,10 +2,12 @@
 \usepackage[dutch]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage{url}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{textcomp}
+\usepackage{tikz}
 
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\lstlistingname}{Code}
@@ -115,5 +117,20 @@
 	\subsection{\texttt{loop()}}
 	
 	\section{Gamebuino library}
+	
+	\section{Testen}
+	% emulator
+	% compileren in Arduino IDE
+	
+	\section{Programma op Gamebuino plaatsen}
+	De Gamebuino laadt bij het opstarten een bootloader, het menu waar je verschillende spelletjes kan kiezen. Om je eigen programma in deze lijst weer te geven, moet je het gecompileerde programma op de SD-kaart plaatsen. Het gecompileerde programma is een bestand met als extensie \emph{.hex}. Dit bestand moet je hernoemen zodat de naam enkel hoofdletters bevat en een maximale lengte heeft van 8 karakters voor de extensie, zoals in Figuur \ref{fig:hernoemen}.
+	\begin{figure}[h]
+		\centering
+		Pong.hex \(\longrightarrow\) PONG.HEX \\
+		SpaceInvaders.hex \(\longrightarrow\) SPACEINV.HEX
+		\caption{\label{fig:hernoemen}Hernoemen van gecompileerde programma's}
+	\end{figure}
+	
+	% INF encoder
 	
 \end{document}
