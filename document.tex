@@ -132,5 +132,17 @@
 	\end{figure}
 	
 	% INF encoder
+	Als je wil dat jouw game met logo en beschrijving wordt weergegeven in het menu, moet je ook een \emph{.INF}-bestand maken met dezelfde naam. Dit doe je met een \textbf{INF encoder}\cite{GitHub:Rodot:InfEncoder}. Deze encoder zet die informatie om naar een bestand dat de Gamebuino-loader kan lezen. Hiervoor heb je een logo nodig van 19x18px en je kan tot 255 slides van 84x32px toevoegen die meer vertellen over de game. De afbeeldingen die je gebruikt voor het logo of de slides mogen enkel de kleuren wit en zwart bevatten, daarom kan je hiervoor best een monochrome bitmap gebruiken als bestandsformaat.
 	
+	Nu heb je twee bestanden met dezelfde naam en de extensies \emph{.HEX} en \emph{.INF}. Door deze twee bestanden op de SD-kaart te plaatsen, zal jouw eigen game nu ook in het opstartmenu verschijnen!
+	
+	\begin{figure}[h]
+		\centering
+		\fbox{\includegraphics[height=3cm]{assets/img/icon}}
+		\fbox{\includegraphics[height=3cm]{assets/img/slide1}}
+		\caption{\label{fig:logo_slide}Voorbeeld van een logo en slide voor Pong, \textbf{niet} op gelijke schaal}
+	\end{figure}
+	
+	\bibliographystyle{plain}
+	\bibliography{document}
 \end{document}
