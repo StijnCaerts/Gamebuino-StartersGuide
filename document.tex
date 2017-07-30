@@ -117,6 +117,50 @@
 	\subsection{\texttt{loop()}}
 	
 	\section{Gamebuino library}
+	Optionele argumenten zijn schuingedrukt.
+	\subsection{Core}
+	\begin{itemize}
+		\item \texttt{gb.begin()}:
+		Initialiseer de Gamebuino. Moet éénmaal opgeroepen worden bij het begin van de \texttt{setup()}-functie, gevolgd door \texttt{gb.titleScreen()} en \texttt{gb.pickRandomSeed()}.
+		
+		\item \texttt{gb.titleScreen(\textit{F("name")}, \textit{logo})}:
+		Toon het titelscherm. Moet opgeroepen worden na \texttt{gb.begin()} om het titelscherm te tonen bij het opstarten. Je moet de gebruiker ook toelaten om terug te gaan naar het titelscherm met de C-knop.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \textit{F("name")}: Naam die wordt weergegeven op het titelscherm, vervang \textit{name} door de naam van jouw spel.
+			\item \textit{logo}: Logo van jouw spel. Kan van formaat variëren tussen 8x8px en 64x30 px, en tot 64x36 px als geen naam is opgegeven.
+		\end{itemize}
+	
+		\item \samepage \texttt{gb.update()}:
+		Geeft \texttt{true} en update het display, geluid, batterij monitor, ... met een vaste frequentie (afhankelijk van de frame rate).
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als voldoende tijd verstreken is sinds het laatste frame.
+		\end{itemize}
+	
+		\item \texttt{gb.setFrameRate(fps)}:
+		Pas het aantal frames per seconde aan. Bepaalt hoe vaak per seconde het programma wordt uitgevoerd (zie \texttt{gb.update()}).
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} fps: Het aantal frames per seconde, standaard 20 fps.
+		\end{itemize}
+	
+		\item \texttt{gb.pickRandomSeed()}:
+		Selecteert een random seed op basis van de batterijspanning, omgevingslicht en de verstreken tijd sinds het opstarten. Moet meteen na \texttt{gb.begin()} en \texttt{gb.titleScreen()} geplaatst worden in \texttt{setup()}.
+		
+		\item \texttt{gb.changeGame()}:
+		Flasht LOADER.HEX van de SD-kaart zodat een ander spel geladen kan worden. Terugkeren naar de loader kan ook via \texttt{gb.titleScreen()}.
+		
+		\item \texttt{gb.frameCount}:
+		Variabele die wordt opgehoogd iedere keer dat er een nieuw frame wordt weergegeven. Aantal frames dat werd gerenderd sinds het programma begon met uitvoeren.
+		
+		\item \texttt{gb.getDefaultName(name)}:
+		Verkrijg de gebruikersnaam die ingesteld is met SETTINGS.HEX.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{char*} name: 10 char lange string waarin de gebruikersnaam wordt opgeslagen.
+		\end{itemize}
+	\end{itemize}
 	
 	\section{Testen}
 	% emulator
@@ -126,13 +170,18 @@
 	De Gamebuino laadt bij het opstarten een bootloader, het menu waar je verschillende spelletjes kan kiezen. Om je eigen programma in deze lijst weer te geven, moet je het gecompileerde programma op de SD-kaart plaatsen. Het gecompileerde programma is een bestand met als extensie \emph{.hex}. Dit bestand moet je hernoemen zodat de naam enkel hoofdletters bevat en een maximale lengte heeft van 8 karakters voor de extensie, zoals in Figuur \ref{fig:hernoemen}.
 	\begin{figure}[h]
 		\centering
-		Pong.hex \(\longrightarrow\) PONG.HEX \\
-		SpaceInvaders.hex \(\longrightarrow\) SPACEINV.HEX
+		\fbox{
+			\parbox{8cm}{
+				\centering
+				Pong.hex \(\longrightarrow\) PONG.HEX \\
+				SpaceInvaders.hex \(\longrightarrow\) SPACEINV.HEX
+			}
+		}
 		\caption{\label{fig:hernoemen}Hernoemen van gecompileerde programma's}
 	\end{figure}
 	
 	% INF encoder
-	Als je wil dat jouw game met logo en beschrijving wordt weergegeven in het menu, moet je ook een \emph{.INF}-bestand maken met dezelfde naam. Dit doe je met een \textbf{INF encoder}\cite{GitHub:Rodot:InfEncoder}. Deze encoder zet die informatie om naar een bestand dat de Gamebuino-loader kan lezen. Hiervoor heb je een logo nodig van 19x18px en je kan tot 255 slides van 84x32px toevoegen die meer vertellen over de game. De afbeeldingen die je gebruikt voor het logo of de slides mogen enkel de kleuren wit en zwart bevatten, daarom kan je hiervoor best een monochrome bitmap gebruiken als bestandsformaat.
+	Als je wil dat jouw game met logo en beschrijving wordt weergegeven in het menu, moet je ook een \emph{.INF}-bestand maken met dezelfde naam. Dit doe je met een \textbf{INF encoder}\cite{GitHub:Rodot:InfEncoder}. Deze encoder zet die informatie om naar een bestand dat de Gamebuino-loader kan lezen. Hiervoor heb je een logo nodig van 19x18 px en je kan tot 255 slides van 84x32 px toevoegen die meer vertellen over de game. De afbeeldingen die je gebruikt voor het logo of de slides mogen enkel de kleuren wit en zwart bevatten, daarom kan je hiervoor best een monochrome bitmap gebruiken als bestandsformaat.
 	
 	Nu heb je twee bestanden met dezelfde naam en de extensies \emph{.HEX} en \emph{.INF}. Door deze twee bestanden op de SD-kaart te plaatsen, zal jouw eigen game nu ook in het opstartmenu verschijnen!
 	
@@ -143,6 +192,7 @@
 		\caption{\label{fig:logo_slide}Voorbeeld van een logo en slide voor Pong, \textbf{niet} op gelijke schaal}
 	\end{figure}
 	
+	\newpage
 	\bibliographystyle{plain}
 	\bibliography{document}
 \end{document}
