@@ -1,6 +1,8 @@
 \documentclass[a4paper,titlepage,12pt]{article}
 \usepackage[dutch]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{url}
@@ -10,6 +12,7 @@
 \usepackage{tikz}
 \usepackage{titlepic}
 \usepackage{float}
+\usepackage{multicol}
 
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\lstlistingname}{Code}
@@ -143,7 +146,7 @@
 	
 	\newpage
 	\section{Gamebuino library}
-	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library.
+	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library.\cite{Gamebuino:Wiki:Reference}
 	Optionele argumenten zijn schuingedrukt.
 	
 	\subsection{Core}
@@ -156,7 +159,7 @@
 		\begin{itemize}
 			\item [] \textbf{Parameters}
 			\item \textit{F("name")}: Naam die wordt weergegeven op het titelscherm, vervang \textit{name} door de naam van jouw spel.
-			\item \textit{logo}: Logo van jouw spel. Kan van formaat variëren tussen 8x8px en 64x30 px, en tot 64x36 px als geen naam is opgegeven.
+			\item \textit{\texttt{byte*} logo}: Logo van jouw spel. Kan van formaat variëren tussen 8x8px en 64x30 px, en tot 64x36 px als geen naam is opgegeven.
 		\end{itemize}
 	
 		\item \samepage \texttt{gb.update()}:
@@ -202,7 +205,7 @@
 		\samepage
 		\begin{itemize}
 			\item [] \textbf{Return}
-			\item \texttt{char} number: Nummer van het geselecteerde item of -1 als het menu verlaten is zonder een item te kiezen.
+			\item \texttt{char}: Nummer van het geselecteerde item of -1 als het menu verlaten is zonder een item te kiezen.
 		\end{itemize}
 	
 		\item \texttt{gb.keyboard(string, length)}:
@@ -221,6 +224,119 @@
 		\end{itemize}
 	\end{itemize}
 	
+	\subsubsection{Physics}
+	\begin{itemize}
+		\item \texttt{gb.collidePointRect(x1,y1,x2,y2,w,h)}: 
+		Controleer of een gegeven punt binnen een rechthoek ligt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{int} x1: Horizontale coördinaat van het punt.
+			\item \texttt{int} y1: Verticale coördinaat van het punt.
+			\item \texttt{int} x2: Horizontale coördinaat van de linksboven hoek van de rechthoek.
+			\item \texttt{int} y2: Verticale coördinaat van de linksboven hoek van de rechthoek.
+			\item \texttt{int} w: Breedte van de rechthoek.
+			\item \texttt{int} h: Hoogte van de rechthoek.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als het punt binnen de rechthoek ligt, anders \texttt{false}.
+		\end{itemize}
+	
+		\samepage\item \texttt{gb.collideRectRect(x1,y1,w1,h1,x2,y2,w2,h2)}: Controleer of twee rechthoeken snijden of overlappen.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{int} x1: Horizontale coördinaat van de linksboven hoek van de eerste rechthoek.
+			\item \texttt{int} y1: Verticale coördinaat van de linksboven hoek van de eerste rechthoek.
+			\item \texttt{int} w1: Breedte van de eerste rechthoek.
+			\item \texttt{int} h1: Hoogte van de eerste rechthoek.
+			\item \texttt{int} x2: Horizontale coördinaat van de linksboven hoek van de tweede rechthoek.
+			\item \texttt{int} y2: Verticale coördinaat van de linksboven hoek van de tweede rechthoek.
+			\item \texttt{int} w2: Breedte van de tweede rechthoek.
+			\item \texttt{int} h2: Hoogte van de tweede rechthoek.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als de twee rechthoeken overlappen, anders \texttt{false}.
+		\end{itemize}
+	
+		\item \texttt{gb.collideBitmapBitmap(x1,y1,b1,x2,y2,b2)}: 
+		Controleer pixel per pixel of twee bitmaps overlappen.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{int} x1: Horizontale coördinaat van de eerste bitmap.
+			\item \texttt{int} y1: Verticale coördinaat van de eerste bitmap.
+			\item  \texttt{byte*} b1: Eerste bitmap.
+			\item \texttt{int} x2: Horizontale coördinaat van de tweede bitmap.
+			\item \texttt{int} y2: Verticale coördinaat van de tweede bitmap.
+			\item  \texttt{byte*} b2: Tweede bitmap.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als de twee bitmaps overlappen, anders \texttt{false}.
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Performance monitor}
+	\begin{itemize}
+		\item \texttt{gb.getCpuLoad()}: Krijg de CPU-belasting uitgedrukt in een percentage.
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{byte}: Percentage van de CPU-tijd die gebruikt wordt. Dit percentage omvat ook de tijd gebruikt door de library voor het updaten van het scherm, audio, schermverlichting, etc.
+		\end{itemize}
+		
+		\item \texttt{gb.getFreeRam()}: Krijg het aantal bytes van het RAM-geheugen dat vrij is door de afstand tussen de heap en de stack te meten. Resultaat is niet consistent.
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{int}: Aantal bytes van het RAM-geheugen dat vrij is. 
+		\end{itemize}
+		
+		\item  \texttt{gb.frameDurationMicros}: Tijd die nodig was om het laatste frame te renderen, uitgedrukt in microsecondes.
+	\end{itemize}
+
+	\subsection{Buttons}
+	De verschillende knoppen die aanwezig zijn op een Gamebuino, staan in de library als een constante. Via deze constantes kan je eenvoudig verwijzen naar een bepaalde knop, zonder de overeenkomstige \texttt{byte} te moeten ingeven.
+	
+	De beschikbare knoppen zijn:
+	\begin{multicols}{4}
+		\begin{itemize}
+			\item \texttt{BTN\_UP}
+			\item \texttt{BTN\_DOWN}
+			\item \texttt{BTN\_LEFT}
+			\item \texttt{BTN\_RIGHT}
+			\item \texttt{BTN\_A}
+			\item \texttt{BTN\_B}
+			\item \texttt{BTN\_C}
+		\end{itemize}
+	\end{multicols}
+
+	Er zijn verschillende functies om met de knoppen te interageren.
+	\begin{itemize}
+		\item \texttt{gb.buttons.pressed(button)}: 
+		Gebruikt om te weten wanneer een knop ingedrukt wordt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} button: Identifier van de knop.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}:  \texttt{true} als de knop ingedrukt wordt, anders \texttt{false}.
+		\end{itemize}
+	
+		\samepage\item \texttt{gb.buttons.released(button)}: Gebruikt om te weten wanneer een knop losgelaten wordt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} button: Identifier van de knop.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als de knop losgelaten wordt, anders \texttt{false}.
+		\end{itemize}
+	
+		\item \texttt{gb.buttons.held(button, duration)}: Gebruikt om te weten wanneer een knop voor een bepaalde tijd ingedrukt wordt.
+	\end{itemize}
+
+
+	\newpage
 	\section{Testen}
 	% emulator
 	% compileren in Arduino IDE
