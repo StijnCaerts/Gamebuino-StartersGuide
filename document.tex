@@ -9,6 +9,7 @@
 \usepackage{textcomp}
 \usepackage{tikz}
 \usepackage{titlepic}
+\usepackage{float}
 
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\lstlistingname}{Code}
@@ -61,13 +62,12 @@
 	stringstyle=\color{red}
 }
 
-\title{Gamebuino: Starters Guide}
+\title{Gamebuino\\ \small{Starters Guide}}
 \author{Stijn Caerts}
 \titlepic{\includegraphics[width=\linewidth]{assets/img/gamebuino-console.jpg}}
 
 \begin{document}
 	\maketitle
-	
 	\tableofcontents
 	\newpage
 	
@@ -82,28 +82,20 @@
 	
 	void setup(){
 		gb.begin();
-		gb.titleScreen(F("Hello World!"));
+		gb.titleScreen();
 		gb.pickRandomSeed();
 	}
 	
 	void loop(){
-		//updates the gamebuino (the display, the sound, the auto backlight... everything)
-		//returns true when it's time to render a new frame (20 times/second)
 		if(gb.update()){
 			if (gb.buttons.pressed(BTN_C)) {
-				gb.titleScreen(F("Hello World!"));
+				gb.titleScreen();
 			}
-			//prints Hello World! on the screen
-			gb.display.println(F("Hello World!"));
-			//declare a variable named count of type integer :
-			int count;
-			//get the number of frames rendered and assign it to the "count" variable
-			count = gb.frameCount;
-			//prints the variable "count"
-			gb.display.println(count);
+			// GAME
 		}
 	}
 	\end{lstlisting}
+	
 	
 	\subsection{Libraries importeren}
 	Voor we aan de slag kunnen gaan met programmeren, moeten we twee libraries importeren. Deze zullen het ons heel wat makkelijker maken om programma's te schrijven voor Gamebuino. De \emph{SPI} library is vereist voor de communicatie met het scherm van de Gamebuino. Verder gebruiken we de \emph{Gamebuino} library, die voor een handige interface zorgt zodat we gemakkelijk alle functies van het apparaat kunnen aanspreken zodat we ons enkel moeten focussen op het ontwerpen en programmeren van het spel zelf.
@@ -113,13 +105,47 @@
 	#include <Gamebuino.h>
 	\end{lstlisting}
 	
+	
 	\subsection{Het \texttt{Gamebuino} object}
+	Het \texttt{Gamebuino} object heeft een belangrijke plaats in een game. Je zal dit object vaak gebruiken om functies op te roepen die specifiek voor de Gamebuino zijn. De klasse \texttt{Gamebuino} is onderdeel van de \emph{Gamebuino} library.
+	\begin{lstlisting}[language=C++, caption={Aanmaken van een \texttt{Gamebuino} object}]
+	Gamebuino gb;
+	\end{lstlisting}
+	
 	
 	\subsection{\texttt{setup()}}
-	\subsection{\texttt{loop()}}
+	De \texttt{setup()} functie wordt eenmaal uitgevoerd bij het opstarten van het programma. Bij een programma voor Gamebuino bevat deze functie steeds de volgende instructies: \texttt{gb.begin()}, \texttt{gb.titleScreen()} en \texttt{gb.pickRandomSeed()}.
+	\begin{lstlisting}[language=C++, caption={\texttt{setup()}}]
+	void setup(){
+		gb.begin();
+		gb.titleScreen();
+		gb.pickRandomSeed();
+	}
+	\end{lstlisting}
 	
+	
+	\subsection{\texttt{loop()}}
+	De functie \texttt{loop()} bevat de instructies van de game die je gaat programmeren. Deze functie wordt telkens opnieuw uitgevoerd. Om er voor te zorgen dat we ons programma met vaste intervallen uitvoeren, plaatsen we hier een \texttt{if}-statement met \texttt{gb.update()} waarin we alle code van ons programma plaatsen (zoals te zien is in codefragment \ref{code:loop}).
+	
+	We moeten in ons programma ook steeds de mogelijkheid voorzien om terug te keren naar het titelscherm met de C-knop. Vanuit het titelscherm kan je het spel afsluiten om een ander spel te laden.
+	
+	\begin{lstlisting}[float=!ht, language=C++, caption={\texttt{loop()}}, label={code:loop}]
+	void loop(){
+		if(gb.update()){
+			if (gb.buttons.pressed(BTN_C)) {
+				gb.titleScreen();
+			}
+			// GAME
+		}
+	}
+	\end{lstlisting}
+	
+	
+	\newpage
 	\section{Gamebuino library}
+	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library.
 	Optionele argumenten zijn schuingedrukt.
+	
 	\subsection{Core}
 	\begin{itemize}
 		\item \texttt{gb.begin()}:
@@ -161,6 +187,37 @@
 		\begin{itemize}
 			\item [] \textbf{Parameters}
 			\item \texttt{char*} name: 10 char lange string waarin de gebruikersnaam wordt opgeslagen.
+		\end{itemize}
+	\end{itemize}
+	
+	\subsubsection{User Interface}
+	\begin{itemize}
+		\item \texttt{gb.menu(menu, length)}:
+		Toont een menu met items om uit te kiezen.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{char** PROGMEM} menu: de items waaruit gekozen kan worden, opgeslagen als een \texttt{PROGMEM}-array van strings.
+			\item \texttt{byte} length: Aantal items in het menu.
+		\end{itemize}
+		\samepage
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{char} number: Nummer van het geselecteerde item of -1 als het menu verlaten is zonder een item te kiezen.
+		\end{itemize}
+	
+		\item \texttt{gb.keyboard(string, length)}:
+		Toon een keyboard zodat de gebruiker tekst kan invoeren.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{char*} string: Ontvangt de tekst ingevoerd door de gebruiker.
+			\item \texttt{byte} length: Maximale lengte van de tekst die de gebruiker kan ingeven.
+		\end{itemize}
+	
+		\item \texttt{gb.popup(F("Text"), duration)}: Toon een pop-up melding aan de onderkant van het scherm voor bepaalde duur.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{PROGMEM char*} F("Text"): Tekst die weergegeven moet worden.
+			\item \texttt{byte} duration: Hoe lang wordt de pop-up weergegeven, uitgedrukt in aantal frames.
 		\end{itemize}
 	\end{itemize}
 	
