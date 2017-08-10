@@ -333,7 +333,40 @@
 		\end{itemize}
 	
 		\item \texttt{gb.buttons.held(button, duration)}: Gebruikt om te weten wanneer een knop voor een bepaalde tijd ingedrukt wordt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} button: Identifier van de knop.
+			\item \texttt{byte} duration: Duur in aantal frames.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} als de knop ingedrukt is voor het gegeven aantal frames, anders \texttt{false}. Geeft slechts eenmaal \texttt{true} terug.
+		\end{itemize}
+	
+		\item \texttt{gb.buttons.repeat(button, duration)}: Gebruikt om een actie te herhalen met een vast interval zolang een knop ingedrukt wordt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} button: Identifier van de knop.
+			\item \texttt{byte} duration: Duur in aantal frames.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{boolean}: \texttt{true} iedere keer dat het gegeven aantal frames is gepasseerd zolang de knop ingedrukt wordt, anders \texttt{false}.
+		\end{itemize}
+	
+		\item \texttt{gb.buttons.timeHeld(button)}: Gebruikt om te weten hoe lang een knop ingedrukt wordt.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} button: Identifier van de knop.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{byte}: Aantal frames dat de knop ingedrukt is.
+		\end{itemize}
 	\end{itemize}
+
+
+	\subsection{Display}
 
 
 	\newpage
