@@ -367,6 +367,25 @@
 
 
 	\subsection{Display}
+	\subsubsection{Constants}
+	\begin{itemize}
+		\item \texttt{LCDWIDTH}: Breedte van het scherm in pixels.
+		\item \texttt{LCDHEIGHT}: Hoogte van het scherm in pixels.
+		\item \texttt{gb.display.fontWidth}: Breedte van het huidige font.
+		\item \texttt{gb.display.fontHeight}: Hoogte van het huidige font.
+	\end{itemize}
+
+	\subsubsection{General}
+	\begin{itemize}
+		\item \texttt{gb.display.persistence} \texttt{(boolean)}: Kies om het scherm te wissen tussen elk frame (\texttt{false}) of niet (\texttt{true}). Standaardwaarde is \texttt{false}.
+		\item \texttt{gb.display.clear()}: Wis de display buffer en stel de positie van de tekstcursor in op $(0,0)$. Als het scherm tussen elk frame gewist moet worden, gebruik dan \texttt{gb.display.persistence}.
+		\item \texttt{gb.display.update()}: Stuur de display buffer naar het display. Gebeurt elk frame automatisch met \texttt{gb.update()}, dus je moet deze functie niet zelf oproepen.
+		\item \texttt{gb.display.fillScreen(color)}: Vul het volledige scherm met een kleur.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} color: \texttt{BLACK} of \texttt{WHITE}.
+		\end{itemize}
+	\end{itemize}
 
 
 	\newpage
