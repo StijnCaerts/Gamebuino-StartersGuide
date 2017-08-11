@@ -378,12 +378,43 @@
 	\subsubsection{General}
 	\begin{itemize}
 		\item \texttt{gb.display.persistence} \texttt{(boolean)}: Kies om het scherm te wissen tussen elk frame (\texttt{false}) of niet (\texttt{true}). Standaardwaarde is \texttt{false}.
+		
 		\item \texttt{gb.display.clear()}: Wis de display buffer en stel de positie van de tekstcursor in op $(0,0)$. Als het scherm tussen elk frame gewist moet worden, gebruik dan \texttt{gb.display.persistence}.
+		
 		\item \texttt{gb.display.update()}: Stuur de display buffer naar het display. Gebeurt elk frame automatisch met \texttt{gb.update()}, dus je moet deze functie niet zelf oproepen.
+		
 		\item \texttt{gb.display.fillScreen(color)}: Vul het volledige scherm met een kleur.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
 			\item \texttt{byte} color: \texttt{BLACK} of \texttt{WHITE}.
+		\end{itemize}
+		
+		\item \texttt{gb.display.setColor(foreground, \textit{background})}: Verander de kleur die gebruikt wordt om te tekenen op het scherm. Mogelijke kleuren zijn: \texttt{WHITE}, \texttt{BLACK}, \texttt{GRAY} en \texttt{INVERT}.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} foreground: Kleur van de voorgrond.
+			\item \textit{\texttt{byte} background}: Kleur van de achtergrond. Als de achtergrondkleur niet gespecificeerd is, dan is de achtergrond transparant.
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Pixels}
+	\begin{itemize}
+		\item \texttt{gb.display.drawPixel(x, y)}: Teken één pixel op de gegeven coördinaten. Kleur wordt bepaald door \texttt{gb.display.setColor()}
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} x: Horizontale coördinaat, tussen $0$ en \texttt{LCDWIDTH}.
+			\item \texttt{byte} y: Verticale coördinaat, tussen $0$ en \texttt{LCDHEIGHT}.
+		\end{itemize}
+	
+		\item \texttt{gb.display.getPixel(x, y)}: Verkrijg de kleur van de gevraagde pixel.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} x: Horizontale coördinaat.
+			\item \texttt{byte} y: Verticale coördinaat.
+		\end{itemize}
+		\begin{itemize}
+			\item [] \textbf{Return}
+			\item \texttt{byte}: $0$ voor \texttt{WHITE}, $1$ voor \texttt{BLACK}.
 		\end{itemize}
 	\end{itemize}
 
