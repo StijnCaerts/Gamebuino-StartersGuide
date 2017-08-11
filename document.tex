@@ -13,6 +13,8 @@
 \usepackage{titlepic}
 \usepackage{float}
 \usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{caption}
 
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\lstlistingname}{Code}
@@ -505,6 +507,79 @@
 			\item \texttt{byte} r: Straal van de cirkel.
 		\end{itemize}
 	\end{itemize}
+
+
+	\subsubsection{Triangles}
+	\begin{itemize}
+		\item \texttt{gb.display.drawTriangle(x1,y1,x2,y2,x3,y3)}: Teken een driehoek.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} x1: Horizontale coördinaat van de eerste hoek.
+			\item \texttt{byte} y1: Verticale coördinaat van de eerste hoek.
+			\item \texttt{byte} x2: Horizontale coördinaat van de tweede hoek.
+			\item \texttt{byte} y2: Verticale coördinaat van de tweede hoek.
+			\item \texttt{byte} x3: Horizontale coördinaat van de derde hoek.
+			\item \texttt{byte} y3: Verticale coördinaat van de derde hoek.
+		\end{itemize}
+	
+		\item \texttt{gb.display.fillTriangle(x1,y1,x2,y2,x3,y3)}: Teken en vul een driehoek.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} x1: Horizontale coördinaat van de eerste hoek.
+			\item \texttt{byte} y1: Verticale coördinaat van de eerste hoek.
+			\item \texttt{byte} x2: Horizontale coördinaat van de tweede hoek.
+			\item \texttt{byte} y2: Verticale coördinaat van de tweede hoek.
+			\item \texttt{byte} x3: Horizontale coördinaat van de derde hoek.
+			\item \texttt{byte} y3: Verticale coördinaat van de derde hoek.
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Bitmaps}
+	\begin{itemize}
+		\item \texttt{gb.display.drawBitmap(x, y, bitmap, \textit{rotation}, \textit{flip})}: Teken een bitmap gegeven als een byte array op het scherm.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte} x: Horizontale coördinaat op het scherm.
+			\item \texttt{byte} y: Verticale coördinaat op het scherm.
+			\item \texttt{byte} bitmap: Een byte array.
+			\item \textit{\texttt{byte} rotation}: Rotatie: \texttt{NOROT}, \texttt{ROTCW}, \texttt{ROTCCW} of \texttt{ROT180}.
+			\item \textit{\texttt{byte} flip}: Spiegeling: \texttt{NOFLIP}, \texttt{FLIPH}, \texttt{FLIPV} of \texttt{FLIPVH}.
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Text}
+	\begin{minipage}{.75\textwidth}
+		\begin{itemize}
+			\item \texttt{gb.display.print(data)}: Print data op het scherm.
+			\begin{itemize}
+				\item [] \textbf{Parameters}
+				\item data: De data die geprint moet worden. Kan verscheidene datatypes hebben. Om RAM-geheugen te sparen, kan je een string uit het flash-memory doorgeven met \texttt{F(data)}.
+			\end{itemize}
+		
+			\item \texttt{gb.display.println(data)}: Print data op het scherm, gevolgd door een carriage return (\texttt{\textbackslash r}) en newline (\texttt{\textbackslash n}) karakter.
+			\begin{itemize}
+				\item [] \textbf{Parameters}: zie \texttt{gb.display.print()}
+			\end{itemize}
+		
+			\item \texttt{gb.display.drawChar(x, y, c, s)}: Teken een karakter op de opgegeven plaats.
+			\begin{itemize}
+				\item [] \textbf{Parameters}
+				\item \texttt{byte} x: Horizontale coördinaat.
+				\item \texttt{byte} y: Verticale coördinaat.
+				\item \texttt{char} c: Code van karakter in de tabel (zie Figuur \ref{fig:characterTable}).
+				\item \texttt{byte} s: Grootte van het karakter.
+			\end{itemize}
+		\end{itemize}
+	\end{minipage}
+	\hspace{0.05\textwidth}
+	\begin{minipage}{.20\textwidth}
+		\centering
+		\includegraphics[scale=0.6]{assets/img/font5x7}
+		\captionof{figure}{Beschikbare karakters in het standaard font.}
+		\label{fig:characterTable}
+	\end{minipage}
+
+
 
 
 	\newpage
