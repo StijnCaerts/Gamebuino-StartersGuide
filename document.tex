@@ -135,7 +135,7 @@
 	
 	\subsection{Libraries importeren}
 	Voor we aan de slag kunnen gaan met programmeren, moeten we twee libraries importeren. Deze zullen het ons heel wat makkelijker maken om programma's te schrijven voor Gamebuino. De \emph{SPI} library is vereist voor de communicatie met het scherm van de Gamebuino. Verder gebruiken we de \emph{Gamebuino} library, die voor een handige interface zorgt zodat we gemakkelijk alle functies van het apparaat kunnen aanspreken zodat we ons enkel moeten focussen op het ontwerpen en programmeren van het spel zelf.
-	Zie wel dat de libraries die je wilt importeren ook geïnstalleerd zijn in de Arduino IDE, anders zal de library niet gevonden worden en zal je de code niet kunnen compilen.
+	Zie wel dat de libraries die je wilt importeren ook geïnstalleerd zijn in de Arduino IDE, anders zal de library niet gevonden worden en zal je de code niet kunnen compileren.
 	\begin{lstlisting}[language=C++, caption={Importeren van libraries}]
 	#include <SPI.h>
 	#include <Gamebuino.h>
@@ -179,7 +179,7 @@
 	
 	\newpage
 	\section{Gamebuino library}
-	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library.\cite{Gamebuino:Wiki:Reference}
+	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library\cite{Gamebuino:Wiki:Reference}.
 	Optionele argumenten zijn schuingedrukt.
 	Voor meer informatie over hoe je deze functies en variabelen kan gebruiken, kan je de voorbeeld-code bekijken in de Arduino IDE via \texttt{File > Examples > Gamebuino}.
 	
@@ -197,7 +197,7 @@
 		\end{itemize}
 	
 		\item \samepage \texttt{gb.update()}:
-		Geeft \texttt{true} en update het display, geluid, batterij monitor, ... met een vaste frequentie (afhankelijk van de frame rate).
+		Geeft \texttt{true} en updatet het display, geluid, batterij monitor, ... met een vaste frequentie (afhankelijk van de frame rate).
 		\begin{itemize}
 			\item [] \textbf{Return}
 			\item \texttt{boolean}: \texttt{true} als voldoende tijd verstreken is sinds het laatste frame.
@@ -266,8 +266,8 @@
 			\item [] \textbf{Parameters}
 			\item \texttt{int} x1: Horizontale coördinaat van het punt.
 			\item \texttt{int} y1: Verticale coördinaat van het punt.
-			\item \texttt{int} x2: Horizontale coördinaat van de linksboven hoek van de rechthoek.
-			\item \texttt{int} y2: Verticale coördinaat van de linksboven hoek van de rechthoek.
+			\item \texttt{int} x2: Horizontale coördinaat van de linkerbovenhoek van de rechthoek.
+			\item \texttt{int} y2: Verticale coördinaat van de linkerbovenhoek van de rechthoek.
 			\item \texttt{int} w: Breedte van de rechthoek.
 			\item \texttt{int} h: Hoogte van de rechthoek.
 		\end{itemize}
@@ -279,12 +279,12 @@
 		\samepage\item \texttt{gb.collideRectRect(x1,y1,w1,h1,x2,y2,w2,h2)}: Controleer of twee rechthoeken snijden of overlappen.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
-			\item \texttt{int} x1: Horizontale coördinaat van de linksboven hoek van de eerste rechthoek.
-			\item \texttt{int} y1: Verticale coördinaat van de linksboven hoek van de eerste rechthoek.
+			\item \texttt{int} x1: Horizontale coördinaat van de linkerbovenhoek van de eerste rechthoek.
+			\item \texttt{int} y1: Verticale coördinaat van de linkerbovenhoek van de eerste rechthoek.
 			\item \texttt{int} w1: Breedte van de eerste rechthoek.
 			\item \texttt{int} h1: Hoogte van de eerste rechthoek.
-			\item \texttt{int} x2: Horizontale coördinaat van de linksboven hoek van de tweede rechthoek.
-			\item \texttt{int} y2: Verticale coördinaat van de linksboven hoek van de tweede rechthoek.
+			\item \texttt{int} x2: Horizontale coördinaat van de linkerbovenhoek van de tweede rechthoek.
+			\item \texttt{int} y2: Verticale coördinaat van de linkerbovenhoek van de tweede rechthoek.
 			\item \texttt{int} w2: Breedte van de tweede rechthoek.
 			\item \texttt{int} h2: Hoogte van de tweede rechthoek.
 		\end{itemize}
@@ -485,8 +485,8 @@
 		\item \texttt{gb.display.drawRect(x,y,w,h)}: Teken een rechthoek.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
-			\item \texttt{byte} x: Horizontale coördinaat van de linksboven hoek.
-			\item \texttt{byte} y: Verticale coördinaat van de linksboven hoek.
+			\item \texttt{byte} x: Horizontale coördinaat van de linkerbovenhoek.
+			\item \texttt{byte} y: Verticale coördinaat van de linkerbovenhoek.
 			\item \texttt{byte} w: Breedte van de rechthoek.
 			\item \texttt{byte} h: Hoogte van de rechthoek.
 		\end{itemize}
@@ -494,8 +494,8 @@
 		\item \texttt{gb.display.fillRect(x,y,w,h)}: Teken en vul een rechthoek.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
-			\item \texttt{byte} x: Horizontale coördinaat van de linksboven hoek.
-			\item \texttt{byte} y: Verticale coördinaat van de linksboven hoek.
+			\item \texttt{byte} x: Horizontale coördinaat van de linkerbovenhoek.
+			\item \texttt{byte} y: Verticale coördinaat van de linkerbovenhoek.
 			\item \texttt{byte} w: Breedte van de rechthoek.
 			\item \texttt{byte} h: Hoogte van de rechthoek.
 		\end{itemize}
@@ -503,8 +503,8 @@
 		\item \texttt{gb.display.drawRoundRect(x,y,w,h,r)}: Teken een rechthoek met afgeronde hoeken.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
-			\item \texttt{byte} x: Horizontale coördinaat van de linksboven hoek.
-			\item \texttt{byte} y: Verticale coördinaat van de linksboven hoek.
+			\item \texttt{byte} x: Horizontale coördinaat van de linkerbovenhoek.
+			\item \texttt{byte} y: Verticale coördinaat van de linkerbovenhoek.
 			\item \texttt{byte} w: Breedte van de rechthoek.
 			\item \texttt{byte} h: Hoogte van de rechthoek.
 			\item \texttt{byte} r: Afronding van de hoeken.
@@ -513,8 +513,8 @@
 		\item \texttt{gb.display.fillRoundRect(x,y,w,h,r)}: Teken en vul een rechthoek met afgeronde hoeken.
 		\begin{itemize}
 			\item [] \textbf{Parameters}
-			\item \texttt{byte} x: Horizontale coördinaat van de linksboven hoek.
-			\item \texttt{byte} y: Verticale coördinaat van de linksboven hoek.
+			\item \texttt{byte} x: Horizontale coördinaat van de linkerbovenhoek.
+			\item \texttt{byte} y: Verticale coördinaat van de linkerbovenhoek.
 			\item \texttt{byte} w: Breedte van de rechthoek.
 			\item \texttt{byte} h: Hoogte van de rechthoek.
 			\item \texttt{byte} r: Afronding van de hoeken.
@@ -644,7 +644,7 @@
 
 	\newpage
 	\section{Testen}
-	Als je een game aan het programmeren bent, wil je natuurlijk ook kunnen testen of deze werkt op de manier dat jij wil. De game iedere keer op de SD-kaart plaatsen als je aanpassingen hebt gemaakt is een tijdrovend proces en daarom niet de ideale manier om snel iets te testen.
+	Als je een game aan het programmeren bent, wil je natuurlijk ook kunnen testen of deze werkt op de manier dat jij wil. De game iedere keer op de SD-kaart plaatsen als je aanpassingen hebt gemaakt, is een tijdrovend proces en daarom niet de ideale manier om snel iets te testen.
 	
 	Om deze reden bestaan er Gamebuino emulators\cite{Gamebuino:Wiki:Emulators}, die de werking van een Gamebuino nabootsen op de computer. Er zijn verschillende emulators beschikbaar, maar Simbuino4Web (\url{http://simbuino4web.ppl-pilot.com/}) is het eenvoudigst om te gebruiken omdat het geen installatie vereist. \\
 	
