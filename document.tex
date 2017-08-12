@@ -575,11 +575,23 @@
 	\begin{minipage}{.20\textwidth}
 		\centering
 		\includegraphics[scale=0.6]{assets/img/font5x7}
-		\captionof{figure}{Beschikbare karakters in het standaard font.}
-		\label{fig:characterTable}
+		\captionof{figure}{\label{fig:characterTable}Beschikbare karakters in het standaard font.}
 	\end{minipage}
 
-
+	\begin{itemize}
+		\item \samepage \texttt{gb.display.setFont(font)}: Verander het font dat gebruikt wordt om tekst te weergeven. \\ Er zijn drie varianten van het standaard font: \emph{font3x3}, \emph{font3x5} en \emph{font5x7}. Om één van de standaard fonts te gebruiken, moet je het volgende toevoegen: \texttt{extern const byte font5x7[];} waarbij je de naam van het gewenste font invult.
+		\begin{itemize}
+			\item [] \textbf{Parameters}
+			\item \texttt{byte*} font: Lettertype.
+		\end{itemize}
+	
+		\item \texttt{gb.display.cursorX}: Horizontale coördinaat van de cursor.
+		\item \texttt{gb.display.cursorY}: Verticale coördinaat van de cursor.
+		
+		\item \texttt{gb.display.fontSize}: De grootte van het font. Gebruikt om te schalen, standaardwaarde is $1$.
+		
+		\item \texttt{gb.display.textWrap}: Kies of de tekst aan de rechterkant van het scherm wordt afgebroken of niet.
+	\end{itemize}
 
 
 	\newpage
