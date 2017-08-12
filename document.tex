@@ -150,6 +150,7 @@
 	\section{Gamebuino library}
 	Hier geven we een overzicht van functies en nuttige variabelen in de \emph{Gamebuino} library.\cite{Gamebuino:Wiki:Reference}
 	Optionele argumenten zijn schuingedrukt.
+	Voor meer informatie over hoe je deze functies en variabelen kan gebruiken, kan je de voorbeeld-code bekijken in de Arduino IDE via \texttt{File > Examples > Gamebuino}.
 	
 	\subsection{Core}
 	\begin{itemize}
@@ -593,12 +594,38 @@
 		\item \texttt{gb.display.textWrap}: Kies of de tekst aan de rechterkant van het scherm wordt afgebroken of niet.
 	\end{itemize}
 
+	\subsection{Sound}
+	Voor een uitgebreider overzicht van de beschikbare functies kan je de Gamebuino Wiki\cite{Gamebuino:Wiki:Reference} raadplegen.
+	\begin{itemize}
+		\item \texttt{gb.sound.playOK()}
+		\item \texttt{gb.sound.playCancel()}
+		\item \texttt{gb.sound.playTick()}
+	\end{itemize}
+
+	\subsection{Battery}
+	\begin{itemize}
+		\item \texttt{gb.battery.voltage}: Spanning van de batterij in mV.
+		
+		\item \texttt{gb.battery.level}: Batterijniveau, ingedeeld volgens de drempels in \emph{SETTINGS.HEX}.
+		
+		\item \texttt{gb.battery.show}: Kies of de batterij indicator weergegeven wordt.
+	\end{itemize}
 
 	\newpage
 	\section{Testen}
-	% emulator
-	% compileren in Arduino IDE
+	Als je een game aan het programmeren bent, wil je natuurlijk ook kunnen testen of deze werkt op de manier dat jij wil. De game iedere keer op de SD-kaart plaatsen als je aanpassingen hebt gemaakt is een tijdrovend proces en daarom niet de ideale manier om snel iets te testen.
 	
+	Om deze reden bestaan er Gamebuino emulators\cite{Gamebuino:Wiki:Emulators}, die de werking van een Gamebuino nabootsen op de computer. Er zijn verschillende emulators beschikbaar, maar Simbuino4Web (\url{http://simbuino4web.ppl-pilot.com/}) is het eenvoudigst om te gebruiken omdat het geen installatie vereist. \\
+	
+	Voordat je de emulator kan gebruiken, moet je eerst jouw game compileren in de Arduino IDE. Dit doe je als volgt: \texttt{Sketch > Export compiled Binary}. Vervolgens kan je dan het gecompileerde bestand, \emph{Game.ino.standard.hex}, gebruiken in de emulator.
+	
+	\begin{figure}[!b]
+		\includegraphics[width=\textwidth]{assets/img/Simbuino4Web.png}
+		\caption{Simbuino4Web}
+	\end{figure}
+	
+	
+	\newpage
 	\section{Programma op Gamebuino plaatsen}
 	De Gamebuino laadt bij het opstarten een bootloader, het menu waar je verschillende spelletjes kan kiezen. Om je eigen programma in deze lijst weer te geven, moet je het gecompileerde programma op de SD-kaart plaatsen. Het gecompileerde programma is een bestand met als extensie \emph{.hex}. Dit bestand moet je hernoemen zodat de naam enkel hoofdletters bevat en een maximale lengte heeft van 8 karakters voor de extensie, zoals in Figuur \ref{fig:hernoemen}.
 	\begin{figure}[h]
@@ -618,7 +645,7 @@
 	
 	Nu heb je twee bestanden met dezelfde naam en de extensies \emph{.HEX} en \emph{.INF}. Door deze twee bestanden op de SD-kaart te plaatsen, zal jouw eigen game nu ook in het opstartmenu verschijnen!
 	
-	\begin{figure}[h]
+	\begin{figure}[!ht]
 		\centering
 		\fbox{\includegraphics[height=3cm]{assets/img/icon}}
 		\fbox{\includegraphics[height=3cm]{assets/img/slide1}}
@@ -626,6 +653,6 @@
 	\end{figure}
 	
 	\newpage
-	\bibliographystyle{plain}
+	\bibliographystyle{unsrt}
 	\bibliography{document}
 \end{document}
